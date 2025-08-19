@@ -13,9 +13,9 @@ const Header = ({ onSearch }: { onSearch?: (q: string) => void} ) => {
     };
     
     return (
-        <header>
+        <header className='header-container'>
         {/* Logo */}
-        <div className='header-container container-fluid d-flex align-items-center justify-content-between'>
+        <div className='container-fluid px-0 d-flex align-items-center justify-content-between'>
             <img src='/Logo.png' alt='Logo Trouve ton Artisan' className='logo'/>
 
             {/* Barre de recherche */}
@@ -36,7 +36,7 @@ const Header = ({ onSearch }: { onSearch?: (q: string) => void} ) => {
                     </div>
                 </form>  
                 {/* Catégories*/}
-                <div className='link mt-5 f-flex gap-2 flex-wrap justify-content-center'>
+                <div className='link mt-5 d-flex gap-2 flex-wrap justify-content-center'>
                     <a href='#' className='categorie-link btn-sm'>Bâtiment</a>
                     <a href='#' className='categorie-link btn-sm'>Services</a>
                     <a href='#' className='categorie-link btn-sm'>Fabrication</a>
