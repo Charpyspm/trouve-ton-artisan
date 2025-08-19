@@ -1,0 +1,71 @@
+//définition des styles pour le composant Header
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 8px 16px -12px rgba(0, 0, 0, .25);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+//position et taille du logo
+.logo {
+    width: 275px;
+    height: auto;
+    margin-left: 5%;
+}
+
+//barre de recherche
+
+.header-search {
+    margin-right: 5%;
+}
+
+.form-control {
+    border-radius: 0%;
+    border: none;
+    border-bottom: 1px solid black;
+}
+
+.form-control:focus {
+    box-shadow: none !important;
+    outline: 0;
+    border-color: white !important;
+    border-bottom: 1px solid black !important;
+}
+
+.button-search {
+    background-color: white;
+    border-radius: 0%;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.button-search:hover {
+    background-color: white;
+    border-bottom: 1px solid black !important;
+    border-right: 1px solid black !important;
+}
+
+
+.button-search:active {
+    background-color: white !important;
+    border-color: white !important;
+    border-bottom: 1px solid black !important;
+    border-right: 1px solid black !important;
+}
+
+//style et positions des liens de catégories
+
+.categorie-link {
+    text-decoration: none;
+    margin-left: 50px;
+    margin-top: 20px;
+    color: black;
+}
+
+.categorie-link:hover {
+    color: black;
+}
+
