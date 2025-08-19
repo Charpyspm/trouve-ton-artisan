@@ -1,0 +1,50 @@
+//Définotion du style pour le composant Footer
+.footer-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    left: 0;
+    width: 100% !important;
+    margin: 0;
+    background-color: #0074c7;
+}
+
+//Position et taille du logo
+.footer-logo {
+    width: 275px;
+    height: auto;
+    margin-left: 5%
+}
+
+.position-logo {
+    margin-left: 5%;
+}
+
+//Position du conteneur d'adresse
+.footer-adresse {
+    margin-top: 10px;
+}
+
+.adresse-contact {
+    margin-right: 75px;
+}
+
+.adresse-details {
+    text-align: left;
+    margin-left: 75px;
+} 
+
+//Position des liens 
+.footer-link {
+    display: flex;
+    flex-direction: column;
+    margin-right: 5%;
+}
+
+.footer-link-item {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-align: left;
+
+}
