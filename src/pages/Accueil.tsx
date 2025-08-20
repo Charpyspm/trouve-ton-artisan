@@ -1,4 +1,5 @@
 import ArtisanCard from "../components/ArtisanCard";
+import './accueil.scss';
 
 const Accueil = () => {
     return (
@@ -13,7 +14,7 @@ const Accueil = () => {
 
             <section className="d-flex flex-column align-items-center mt-5">
                 <h2 className="text-center mb-5">Top 3 Artisans :</h2>
-                <div className="d-flex flex-row gap-5 mt-5 mb-5">
+                <div className="card-top d-flex flex-row gap-5 mt-5 mb-5">
                     <ArtisanCard name={"paul"} rating={4.0} speciality={"Plombier"} location={"Lyon"} />
                     <ArtisanCard name={"jacques"} rating={5.0} speciality={"Électricien"} location={"Paris"} />
                     <ArtisanCard name={"pierre"} rating={4.5} speciality={"Boulanger"} location={"Marseille"} />
