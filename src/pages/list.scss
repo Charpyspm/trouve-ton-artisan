@@ -1,0 +1,14 @@
+// VERSION MOBILE
+@media (max-width: 576px) {
+
+    /*Centrage des cards*/
+    .col {
+        display: flex;        
+        justify-content: center;
+        width: 100%;
+    }
+
+    .page-title {
+        font-size: 2rem;
+    }
+}

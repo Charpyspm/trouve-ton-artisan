@@ -1,10 +1,11 @@
 import ArtisanCard  from "../components/ArtisanCard";
+import './list.scss';
 
 const List = () => {
     return (
         <>
             <section className="d-flex flex-column align-items-center">
-                <h1 className="text-center mt-5 mb-5">Liste des Artisans :</h1>
+                <h1 className="page-title text-center mt-5 mb-5">Liste des Artisans :</h1>
                 <div className="container mt-5 mb-5">
                     <div className="row row-cols-1 row-cols-md-3 g-4">
                         <div className="col"><ArtisanCard name="paul" rating={4.0} speciality="Plombier" location="Lyon" /></div>
