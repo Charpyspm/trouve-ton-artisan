@@ -19,18 +19,18 @@ function renderStars(rating: number) {
 
 export default function ArtisanCard({ name, rating, speciality, location }: ArtisanCardProps) {
     return (
-        <div className="card h-100 shadow-sm">
+        <div className="card h-150 shadow-sm">
             <div className="card-body">
-                <h5 className="card-title mb-1">{name}</h5>
+                <h5 className="card-title mb-3">{name}</h5>
 
-                <div className="d-flex align-items-center gap-2 mb-2 rating" aria-label={`Note ${rating} sur 5`}>
+                <div className="d-flex align-items-center gap-2 mb-3 rating" aria-label={`Note ${rating} sur 5`}>
                     <div className="text-warning d-flex align-items-center gap-1">
                         {renderStars(rating)}
                     </div>
                     <small className="text-muted">({rating.toFixed(1)}/5)</small>
                 </div>
 
-                <div className="mb-2">
+                <div className="mb-3">
                     <span className="badge text-bg-primary">{speciality}</span>
                 </div>
 
