@@ -5,7 +5,7 @@ import { Offcanvas } from 'bootstrap';
 
 
 // Header component 
-const Header = ({ onSearch }: { onSearch?: (q: string) => void} ) => {
+const Header = () => {
     const [q, setQ] = useState('');
     const navigate = useNavigate();
 
@@ -21,7 +21,8 @@ const Header = ({ onSearch }: { onSearch?: (q: string) => void} ) => {
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
         const v = q.trim();
-        if (v) onSearch?.(v);
+        if (!v) return;
+        navigate(`/list?${new URLSearchParams({ q: v }).toString()}`);
     };
     
     return (

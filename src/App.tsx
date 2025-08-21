@@ -8,14 +8,10 @@ import Fiche from './pages/Fiche';
 import NotFound from './pages/NotFound';
 
 export default function App() {
-  const handleSearch = (q: string) => {
-    console.log('query:', q);
-  };
-
 
   return (
     <BrowserRouter>
-      <Header onSearch={handleSearch}/>
+  <Header />
       <Routes>
         <Route path="/" element={<Accueil />} />
         <Route path="/list" element={<List />} />
