@@ -1,69 +1,75 @@
-# React + TypeScript + Vite
+# Trouve ton artisan
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Application web (Vite + React + TypeScript) avec un backend Node/Express et une base MySQL.
 
-Currently, two official plugins are available:
+## Prérequis
+- Node.js 18+ (recommandé: LTS récent)
+- npm 9+
+- MySQL 8 (service démarré en local)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Structure du projet
+- Frontend: racine du repo (Vite, React, TS)
+- Backend: dossier `backend/` (Express, mysql2)
+- Base de données: scripts SQL dans `sql/`
 
-## Expanding the ESLint configuration
+## Installation
+1. Cloner le repo et installer les dépendances du frontend:
+   - npm install
+2. Installer les dépendances du backend:
+   - cd backend
+   - npm install
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Base de données
+1. Créer la base et les tables (depuis MySQL):
+   - Exécuter `sql/creation.sql`
+2. Importer les données:
+   - Exécuter `sql/remplissage.sql`
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Configuration backend (.env)
+Créer un fichier `backend/.env` avec:
 ```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+DB_HOST=localhost
+DB_PORT=3306
+DB_USER=tta_app            # ou votre utilisateur MySQL
+DB_PASSWORD=mot_de_passe   # le mot de passe associé
+DB_NAME=trouve_ton_artisan
+PORT=5174
 ```
+Note: le fichier `.env` est ignoré par git.
+
+## Lancer en développement
+Ouvrir deux terminaux.
+
+Terminal 1 – Backend:
+```
+cd backend
+npm start
+```
+API disponible sur http://localhost:5174 (ex: GET /api/health)
+
+Terminal 2 – Frontend:
+```
+npm run dev
+```
+Frontend sur http://localhost:5173. Les appels `/api` sont proxifiés vers le backend (voir `vite.config.ts`).
+
+## Scripts utiles (frontend)
+- `npm run dev` – démarre Vite
+- `npm run build` – build de production
+- `npm run preview` – sert le build localement
+- `npm run lint` – lint du code
+
+## Vérifications rapides
+- API: `GET http://localhost:5174/api/health` doit renvoyer `{ "ok": true }`
+- Données: `GET http://localhost:5174/api/artisans` renvoie la liste des artisans
+- Frontend: pages Accueil, Liste, Fiche, NotFound accessibles
+
+## Dépannage
+- Port 5174 occupé: le backend tourne déjà. Arrêtez le processus ou changez `PORT` dans `backend/.env` et relancez.
+- Erreur MySQL (Access denied): vérifiez utilisateur/mot de passe et que MySQL est démarré.
+- CORS: en dev, le proxy Vite contourne les soucis. Ajustez `vite.config.ts` ou la config CORS backend si nécessaire.
+
+## Sécurité (résumé)
+- Éviter l’utilisateur MySQL `root`: créer un utilisateur dédié avec droits minimaux (SELECT).
+- Stocker les secrets uniquement dans `backend/.env`.
+- En prod: ajouter Helmet, rate limiting, et restreindre CORS aux domaines autorisés.
