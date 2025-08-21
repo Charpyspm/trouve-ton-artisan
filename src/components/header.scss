@@ -119,12 +119,18 @@
         display: none !important;
     }
 
-    .logo {
-        width: 160px;
-        margin: 0; /* annule le auto */
+    .logo-link {
         position: absolute;
         left: 50%;
-        transform: translateX(-50%);
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        display: block;
+    }
+    .logo {
+        width: 160px;
+        margin: 0;
+        display: block;
     }
 
     .form-control {

@@ -29,7 +29,9 @@ const Header = () => {
         <header className='header-container'>
         {/* Logo */}
         <div className='container-fluid px-0 d-flex align-items-center justify-content-between flex-nowrap w-100'>
-            <img src='/Logo.png' alt='Logo Trouve ton Artisan' className='logo order-3 order-md-1'/>
+            <Link to='/' className='logo-link order-3 order-md-1'>
+                <img src='/Logo.png' alt='Logo Trouve ton Artisan' className='logo'/>
+            </Link>
 
             {/* Barre de recherche + menu burger (mobile) */}
             <div className='header-search flex-grow-1 px-2 order-2 order-md-2' style={{ minWidth: 0 }}>
