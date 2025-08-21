@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 import ArtisanCard from "../components/ArtisanCard";
 import { fetchArtisans, type Artisan } from "../lib/api";
 import './accueil.scss';
+import { usePageMeta } from '../lib/usePageMeta';
 
 const Accueil = () => {
     const [topArtisans, setTopArtisans] = useState<Artisan[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
+    usePageMeta('Accueil - Trouve ton artisan', 'Trouvez les meilleurs artisans proche de chez vous en un clic!')
     useEffect(() => {
         fetchArtisans()
             .then((all) => all.filter(a => Number(a.Top) === 1).slice(0, 3))

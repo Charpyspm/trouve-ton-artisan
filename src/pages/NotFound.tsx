@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom';
+import { usePageMeta } from '../lib/usePageMeta';
 
 export default function NotFound() {
+    usePageMeta('Page introuvable - Trouve ton artisan', 'La page demandée n\'existe pas.');
+
     return (
         <div className='container py-5'>
             <h1 className='text-center mb-3 mt-3'>Page introuvable</h1>

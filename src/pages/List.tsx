@@ -3,6 +3,8 @@ import { useSearchParams } from 'react-router-dom';
 import ArtisanCard  from "../components/ArtisanCard";
 import { fetchArtisans, type Artisan } from "../lib/api";
 import './list.scss';
+import { usePageMeta } from '../lib/usePageMeta';
+
 
 const List = () => {
     const [artisans, setArtisans] = useState<Artisan[]>([]);
@@ -11,6 +13,8 @@ const List = () => {
     const [searchParams] = useSearchParams();
     const categorie = searchParams.get('categorie');
     const q = searchParams.get('q')?.trim().toLowerCase() || '';
+
+    usePageMeta('Liste des Artisans - Trouve ton artisan', 'Découvrez les artisans près de chez vous qui correspondent à vos besoins.')
 
     useEffect(() => {
         fetchArtisans()

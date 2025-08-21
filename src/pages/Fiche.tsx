@@ -3,6 +3,8 @@ import ArtisanFiche from "../components/ArtisanFiche";
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { fetchArtisan, type Artisan } from '../lib/api';
+import { usePageMeta } from '../lib/usePageMeta';
+
 
 const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -28,6 +30,14 @@ const Fiche = () => {
             .catch((e) => setError(e.message || 'Erreur de chargement'))
             .finally(() => setLoading(false));
     }, [nom]);
+
+    const title = artisan
+        ? `${artisan.Nom} – ${artisan.Spécialité}`
+        : 'Fiche artisan – Trouve ton artisan';
+    const description = artisan
+        ? `Contactez ${artisan.Nom}, artisan ${artisan.Spécialité} à ${artisan.Ville}.`
+        : 'Détails d\u2019un artisan.';
+    usePageMeta(title, description);
 
     return (
         <div className="container py-4">
