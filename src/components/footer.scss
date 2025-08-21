@@ -28,11 +28,13 @@
 
 .adresse-contact {
     margin-right: 75px;
+    color: #00497c;
 }
 
 .adresse-details {
     text-align: left;
     margin-left: 75px;
+    color: #00497c;
 } 
 
 //Position des liens 
@@ -46,7 +48,12 @@
     margin-top: 15px;
     margin-bottom: 15px;
     text-align: left;
+    color: #00497c;
 
+}
+
+.footer-link-item:hover {
+    color: #00497c;
 }
 
 
