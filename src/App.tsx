@@ -4,6 +4,8 @@ import Footer from './components/Footer';
 import Header from './components/Header'
 import Accueil from './pages/Accueil';
 import List from './pages/List';
+import Fiche from './pages/Fiche';
+
 
 export default function App() {
   const handleSearch = (q: string) => {
@@ -17,6 +19,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Accueil />} />
         <Route path="/list" element={<List />} />
+        <Route path="/fiche" element={<Fiche />} />
       </Routes>
       <Footer />
     </BrowserRouter>
