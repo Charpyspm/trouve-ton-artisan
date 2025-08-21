@@ -33,9 +33,9 @@ const Header = () => {
                 <img src='/Logo.png' alt='Logo Trouve ton Artisan' className='logo'/>
             </Link>
 
-            {/* Barre de recherche + menu burger (mobile) */}
+            {/* Barre de recherche + menu burger */}
             <div className='header-search flex-grow-1 px-2 order-2 order-md-2' style={{ minWidth: 0 }}>
-                {/* Collapse: caché en mobile, visible ≥ md */}
+                {/* Caché en mobile */}
                 <div id='headerSearchCollapse' className='collapse d-md-block w-100'>
                 <form className='ms-auto w-100' role='search' onSubmit={submit}>
                     <div className='input-group w-100'>
@@ -53,7 +53,7 @@ const Header = () => {
                     </div>
                 </form>
                 </div>
-                {/* Catégories inline: cachées en mobile */}
+                {/* Cachées en mobile */}
                     <div className='link mt-3 mb-3 d-none d-md-flex gap-2 flex-wrap justify-content-end'>
                         <Link to='/list?categorie=Bâtiment' className='categorie-link btn-sm'>Bâtiment</Link>
                         <Link to='/list?categorie=Services' className='categorie-link btn-sm'>Services</Link>
@@ -61,7 +61,7 @@ const Header = () => {
                         <Link to='/list?categorie=Alimentation' className='categorie-link btn-sm'>Alimentation</Link>
                 </div>
             </div>
-            {/* Bouton toggle recherche: visible uniquement en mobile */}
+            {/* Bouton recherche visible mobile */}
             <button
                 type='button'
                 className='btn btn-outline-dark d-md-none me-2 order-1'
@@ -73,7 +73,7 @@ const Header = () => {
             >
                 <i className='bi bi-search'></i>
             </button>
-            {/* Bouton burger placé à l'extrémité droite (mobile uniquement) */}
+            {/* Bouton burger */}
             <button
                 type='button'
                 className='btn btn-outline-dark d-md-none burger-btn ms-2 me-2 order-4'
@@ -86,7 +86,7 @@ const Header = () => {
             </button>
             
         </div>
-        {/* Menu catégories (mobile) */}
+        {/* Menu catégories */}
         <div
             className='offcanvas offcanvas-end d-md-none'
             tabIndex={-1}

@@ -22,7 +22,7 @@ function renderStars(rating: number) {
 
 export default function ArtisanFiche({ name, profilePicture, rating, speciality, location }: ArtisanFicheProps) {
     return (
-        <div className="card h-150 shadow-sm">
+        <div className="artisan-card card h-150 shadow-sm">
             <div className="card-body">
                 <h5 className="card-title text-center mb-3">{name}</h5>
 
