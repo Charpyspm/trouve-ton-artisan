@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './footer.scss';
 
 const Footer = () => {
@@ -25,10 +26,10 @@ const Footer = () => {
 
                 </div>
                 <div className='footer-link'>
-                    <a href="#" className='footer-link-item'>Mentions légales</a>
-                    <a href="#" className='footer-link-item'>Données personnelles</a>
-                    <a href="#" className='footer-link-item'>Accessibilité</a>
-                    <a href="#" className='footer-link-item'>Cookies</a>
+                    <Link to="*" className='footer-link-item'>Mentions légales</Link>
+                    <Link to="*" className='footer-link-item'>Données personnelles</Link>
+                    <Link to="*" className='footer-link-item'>Accessibilité</Link>
+                    <Link to="*" className='footer-link-item'>Cookies</Link>
                 </div>
             </div>
         </footer>

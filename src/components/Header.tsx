@@ -1,5 +1,6 @@
 import { useState} from 'react';
 import './header.scss';
+import { Link } from 'react-router-dom';
 
 
 // Header component 
@@ -40,10 +41,10 @@ const Header = ({ onSearch }: { onSearch?: (q: string) => void} ) => {
                 </div>
                 {/* Catégories inline: cachées en mobile, visibles ≥ md */}
                 <div className='link mt-5 d-none d-md-flex gap-2 flex-wrap justify-content-center'>
-                    <a href='#' className='categorie-link btn-sm'>Bâtiment</a>
-                    <a href='#' className='categorie-link btn-sm'>Services</a>
-                    <a href='#' className='categorie-link btn-sm'>Fabrication</a>
-                    <a href='#' className='categorie-link btn-sm'>Alimentation</a>
+                    <Link to='*' className='categorie-link btn-sm'>Bâtiment</Link>
+                    <Link to='*' className='categorie-link btn-sm'>Services</Link>
+                    <Link to='*' className='categorie-link btn-sm'>Fabrication</Link>
+                    <Link to='*' className='categorie-link btn-sm'>Alimentation</Link>
                 </div>
             </div>
             {/* Bouton toggle recherche: visible uniquement en mobile */}
@@ -84,10 +85,10 @@ const Header = ({ onSearch }: { onSearch?: (q: string) => void} ) => {
             </div>
             <div className='offcanvas-body'>
                 <nav className='nav flex-column'>
-                    <a className='nav-link' href='#'>Bâtiment</a>
-                    <a className='nav-link' href='#'>Services</a>
-                    <a className='nav-link' href='#'>Fabrication</a>
-                    <a className='nav-link' href='#'>Alimentation</a>
+                    <Link className='nav-link' to='*'>Bâtiment</Link>
+                    <Link className='nav-link' to='*'>Services</Link>
+                    <Link className='nav-link' to='*'>Fabrication</Link>
+                    <Link className='nav-link' to='*'>Alimentation</Link>
                 </nav>
             </div>
         </div>

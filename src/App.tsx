@@ -5,7 +5,7 @@ import Header from './components/Header'
 import Accueil from './pages/Accueil';
 import List from './pages/List';
 import Fiche from './pages/Fiche';
-
+import NotFound from './pages/NotFound';
 
 export default function App() {
   const handleSearch = (q: string) => {
@@ -20,6 +20,7 @@ export default function App() {
         <Route path="/" element={<Accueil />} />
         <Route path="/list" element={<List />} />
         <Route path="/fiche" element={<Fiche />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
       <Footer />
     </BrowserRouter>
