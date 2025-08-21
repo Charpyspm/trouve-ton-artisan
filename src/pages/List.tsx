@@ -10,6 +10,7 @@ const List = () => {
     const [error, setError] = useState<string | null>(null);
     const [searchParams] = useSearchParams();
     const categorie = searchParams.get('categorie');
+    const q = searchParams.get('q')?.trim().toLowerCase() || '';
 
     useEffect(() => {
         fetchArtisans()
@@ -19,10 +20,18 @@ const List = () => {
     }, []);
 
     const filtered = useMemo(() => {
-        if (!categorie) return artisans;
-        // compare exact category string as stored in DB (with accent)
-        return artisans.filter(a => a.Catégorie === categorie);
-    }, [artisans, categorie]);
+        let res = artisans;
+        if (categorie) {
+            res = res.filter(a => a.Catégorie === categorie);
+        }
+        if (q) {
+            res = res.filter(a => {
+                const hay = `${a.Nom} ${a.Spécialité} ${a.Ville} ${a.Catégorie}`.toLowerCase();
+                return hay.includes(q);
+            });
+        }
+        return res;
+    }, [artisans, categorie, q]);
 
     return (
         <section className="d-flex flex-column align-items-center">
