@@ -1,7 +1,21 @@
+import { useEffect, useState } from 'react';
 import ArtisanCard from "../components/ArtisanCard";
+import { fetchArtisans, type Artisan } from "../lib/api";
 import './accueil.scss';
 
 const Accueil = () => {
+    const [topArtisans, setTopArtisans] = useState<Artisan[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        fetchArtisans()
+            .then((all) => all.filter(a => Number(a.Top) === 1).slice(0, 3))
+            .then(setTopArtisans)
+            .catch((e) => setError(e.message || 'Erreur lors du chargement'))
+            .finally(() => setLoading(false));
+    }, []);
+
     return (
         <>
             <section className="d-flex flex-column align-items-center">
@@ -14,10 +28,24 @@ const Accueil = () => {
 
             <section className="d-flex flex-column align-items-center mt-5">
                 <h2 className="text-center mb-5">Top 3 Artisans :</h2>
-                <div className="card-top d-flex flex-row gap-5 mt-5 mb-5">
-                    <ArtisanCard name={"paul"} rating={4.0} speciality={"Plombier"} location={"Lyon"} />
-                    <ArtisanCard name={"jacques"} rating={5.0} speciality={"Électricien"} location={"Paris"} />
-                    <ArtisanCard name={"pierre"} rating={4.5} speciality={"Boulanger"} location={"Marseille"} />
+                <div className="container">
+                    {loading && <p className="text-center">Chargement…</p>}
+                    {error && <p className="text-center text-danger">{error}</p>}
+                    {!loading && !error && (
+                        <div className="row row-cols-1 row-cols-md-3 g-4 mt-2 mb-5">
+                            {topArtisans.map((a) => (
+                                <div className="col" key={a.Nom}>
+                                    <ArtisanCard
+                                        name={a.Nom}
+                                        rating={Number(a.Note) || 0}
+                                        speciality={a.Spécialité}
+                                        location={a.Ville}
+                                        to={`/fiche/${encodeURIComponent(a.Nom)}`}
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
             </section>
         </>

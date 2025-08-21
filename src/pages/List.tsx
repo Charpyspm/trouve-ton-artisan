@@ -1,28 +1,54 @@
+import { useEffect, useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import ArtisanCard  from "../components/ArtisanCard";
+import { fetchArtisans, type Artisan } from "../lib/api";
 import './list.scss';
 
 const List = () => {
+    const [artisans, setArtisans] = useState<Artisan[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+    const [searchParams] = useSearchParams();
+    const categorie = searchParams.get('categorie');
+
+    useEffect(() => {
+        fetchArtisans()
+            .then(setArtisans)
+            .catch((e) => setError(e.message || 'Erreur lors du chargement'))
+            .finally(() => setLoading(false));
+    }, []);
+
+    const filtered = useMemo(() => {
+        if (!categorie) return artisans;
+        // compare exact category string as stored in DB (with accent)
+        return artisans.filter(a => a.Catégorie === categorie);
+    }, [artisans, categorie]);
+
     return (
-        <>
-            <section className="d-flex flex-column align-items-center">
-                <h1 className="page-title text-center mt-5 mb-5">Liste des Artisans :</h1>
-                <div className="container mt-5 mb-5">
+        <section className="d-flex flex-column align-items-center">
+            <h1 className="page-title text-center mt-5 mb-4">Liste des Artisans :</h1>
+
+            <div className="container mb-5">
+                {loading && <p className="text-center">Chargement…</p>}
+                {error && <p className="text-center text-danger">{error}</p>}
+
+                {!loading && !error && (
                     <div className="row row-cols-1 row-cols-md-3 g-4">
-                        <div className="col"><ArtisanCard name="paul" rating={4.0} speciality="Plombier" location="Lyon" /></div>
-                        <div className="col"><ArtisanCard name="jacques" rating={5.0} speciality="Électricien" location="Paris" /></div>
-                        <div className="col"><ArtisanCard name="pierre" rating={4.5} speciality="Boulanger" location="Marseille" /></div>
-                        <div className="col"><ArtisanCard name="martin" rating={4.0} speciality="Maçon" location="Lille" /></div>
-                        <div className="col"><ArtisanCard name="sophie" rating={4.0} speciality="Jardinière" location="Nice" /></div>
-                        <div className="col"><ArtisanCard name="luc" rating={4.0} speciality="Cuisinier" location="Bordeaux" /></div>
-                        <div className="col"><ArtisanCard name="emilie" rating={4.0} speciality="Coiffeuse" location="Toulouse" /></div>
-                        <div className="col"><ArtisanCard name="nicolas" rating={4.0} speciality="Mécanicien" location="Strasbourg" /></div>
-                        <div className="col"><ArtisanCard name="jean" rating={4.0} speciality="Plombier" location="Lille" /></div>
-                        <div className="col"><ArtisanCard name="marie" rating={4.0} speciality="Électricien" location="Nice" /></div>
+                        {filtered.map((a) => (
+                            <div className="col" key={a.Nom}>
+                                <ArtisanCard
+                                    name={a.Nom}
+                                    rating={Number(a.Note) || 0}
+                                    speciality={a.Spécialité}
+                                    location={a.Ville}
+                                    to={`/fiche/${encodeURIComponent(a.Nom)}`}
+                                />
+                            </div>
+                        ))}
                     </div>
-                </div>
-            </section>
-        </>
-            
+                )}
+            </div>
+        </section>
     );
 };
 

@@ -1,8 +1,11 @@
+import { Link } from 'react-router-dom';
+
 type ArtisanCardProps = {
     name: string;
     rating: number;
     speciality: string;
     location: string;
+    to?: string; // optional route for navigation
 };
 
 function renderStars(rating: number) {
@@ -17,9 +20,9 @@ function renderStars(rating: number) {
     return stars;
 }
 
-export default function ArtisanCard({ name, rating, speciality, location }: ArtisanCardProps) {
+export default function ArtisanCard({ name, rating, speciality, location, to }: ArtisanCardProps) {
     return (
-        <div className="card h-150 shadow-sm">
+    <div className="card h-150 shadow-sm position-relative">
             <div className="card-body">
                 <h5 className="card-title mb-3">{name}</h5>
 
@@ -38,6 +41,10 @@ export default function ArtisanCard({ name, rating, speciality, location }: Arti
                     <i className="bi bi-geo-alt" aria-hidden="true"/>
                     <small>{location}</small>
                 </div>
+
+                {to && (
+                    <Link to={to} className="stretched-link" aria-label={`Voir la fiche de ${name}`}></Link>
+                )}
             </div>
         </div>
     );

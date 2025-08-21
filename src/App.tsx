@@ -19,7 +19,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Accueil />} />
         <Route path="/list" element={<List />} />
-        <Route path="/fiche" element={<Fiche />} />
+  <Route path="/fiche/:nom" element={<Fiche />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
       <Footer />
