@@ -1,11 +1,22 @@
 import { useState} from 'react';
 import './header.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { Offcanvas } from 'bootstrap';
 
 
 // Header component 
 const Header = ({ onSearch }: { onSearch?: (q: string) => void} ) => {
     const [q, setQ] = useState('');
+    const navigate = useNavigate();
+
+    const goToCategory = (cat: string) => {
+        navigate(`/list?${new URLSearchParams({ categorie: cat }).toString()}`);
+        const el = document.getElementById('categoriesMenu');
+        if (el) {
+            const oc = Offcanvas.getInstance(el) || new Offcanvas(el);
+            oc.hide();
+        }
+    };
 
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -41,10 +52,10 @@ const Header = ({ onSearch }: { onSearch?: (q: string) => void} ) => {
                 </div>
                 {/* Catégories inline: cachées en mobile, visibles ≥ md */}
                 <div className='link mt-5 d-none d-md-flex gap-2 flex-wrap justify-content-center'>
-                    <Link to='*' className='categorie-link btn-sm'>Bâtiment</Link>
-                    <Link to='*' className='categorie-link btn-sm'>Services</Link>
-                    <Link to='*' className='categorie-link btn-sm'>Fabrication</Link>
-                    <Link to='*' className='categorie-link btn-sm'>Alimentation</Link>
+                    <Link to='/list?categorie=Bâtiment' className='categorie-link btn-sm'>Bâtiment</Link>
+                    <Link to='/list?categorie=Services' className='categorie-link btn-sm'>Services</Link>
+                    <Link to='/list?categorie=Fabrication' className='categorie-link btn-sm'>Fabrication</Link>
+                    <Link to='/list?categorie=Alimentation' className='categorie-link btn-sm'>Alimentation</Link>
                 </div>
             </div>
             {/* Bouton toggle recherche: visible uniquement en mobile */}
@@ -85,10 +96,10 @@ const Header = ({ onSearch }: { onSearch?: (q: string) => void} ) => {
             </div>
             <div className='offcanvas-body'>
                 <nav className='nav flex-column'>
-                    <Link className='nav-link' to='*'>Bâtiment</Link>
-                    <Link className='nav-link' to='*'>Services</Link>
-                    <Link className='nav-link' to='*'>Fabrication</Link>
-                    <Link className='nav-link' to='*'>Alimentation</Link>
+                    <button type='button' className='nav-link btn btn-link text-start' onClick={() => goToCategory('Bâtiment')}>Bâtiment</button>
+                    <button type='button' className='nav-link btn btn-link text-start' onClick={() => goToCategory('Services')}>Services</button>
+                    <button type='button' className='nav-link btn btn-link text-start' onClick={() => goToCategory('Fabrication')}>Fabrication</button>
+                    <button type='button' className='nav-link btn btn-link text-start' onClick={() => goToCategory('Alimentation')}>Alimentation</button>
                 </nav>
             </div>
         </div>

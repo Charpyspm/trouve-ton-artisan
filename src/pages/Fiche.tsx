@@ -1,5 +1,8 @@
 import './fiche.scss';
 import ArtisanFiche from "../components/ArtisanFiche";
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { fetchArtisan, type Artisan } from '../lib/api';
 
 const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -13,25 +16,42 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 }
 
 const Fiche = () => {
+    const { nom } = useParams();
+    const [artisan, setArtisan] = useState<Artisan | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        if (!nom) return;
+        fetchArtisan(nom)
+            .then(setArtisan)
+            .catch((e) => setError(e.message || 'Erreur de chargement'))
+            .finally(() => setLoading(false));
+    }, [nom]);
+
     return (
         <div className="container py-4">
             <div className="row g-4 align-items-start">
                 <div className="col-12 col-lg-8 fiche-artisan">
-                    <ArtisanFiche
-                        name="John Doe"
-                        profilePicture="https://via.placeholder.com/150"
-                        rating={4.5}
-                        speciality="Plomberie"
-                        location="Paris"
-                    />
+                    {loading && <p>Chargement…</p>}
+                    {error && <p className='text-danger'>{error}</p>}
+                    {artisan && (
+                        <ArtisanFiche
+                            name={artisan.Nom}
+                            profilePicture={undefined}
+                            rating={Number(artisan.Note) || 0}
+                            speciality={artisan.Spécialité}
+                            location={artisan.Ville}
+                        />
+                    )}
                 </div>
                 <div className="col-12 col-lg-4 about-artisan">
                     <h2 className='text-center'>A propos : </h2>
-                    <p>
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reiciendis eos explicabo omnis incidunt! Odio,
-                        quibusdam delectus. Ut dolores debitis quia, exercitationem sint labore libero adipisci asperiores, cupiditate
-                        id nisi molestias.
-                    </p>
+                    {artisan ? (
+                        <p>{artisan.A_propos}</p>
+                    ) : (
+                        <p>Chargement…</p>
+                    )}
                 </div>
             </div>
 
