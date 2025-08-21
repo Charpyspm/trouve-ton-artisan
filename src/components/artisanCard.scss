@@ -1,0 +1,16 @@
+.artisan-card {
+	background-color: #f1f8fc;
+	border-color: #e3eef6;
+
+	.rating {
+		.bi-star-fill,
+		.bi-star-half {
+			color: #0074c7 !important;
+		}
+
+		.bi-star {
+			color: #d0d5dd !important;
+		}
+	}
+}
+

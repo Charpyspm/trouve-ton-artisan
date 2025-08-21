@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import './artisanCard.scss';
 
 type ArtisanCardProps = {
     name: string;
@@ -22,7 +23,7 @@ function renderStars(rating: number) {
 
 export default function ArtisanCard({ name, rating, speciality, location, to }: ArtisanCardProps) {
     return (
-    <div className="card h-150 shadow-sm position-relative">
+    <div className="artisan-card card h-150 shadow-sm position-relative">
             <div className="card-body">
                 <h5 className="card-title mb-3">{name}</h5>
 

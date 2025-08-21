@@ -55,61 +55,60 @@ const Fiche = () => {
                         />
                     )}
                 </div>
-                <div className="col-12 col-lg-4 about-artisan">
-                    <h2 className='text-center'>A propos : </h2>
-                    {artisan ? (
-                        <p>{artisan.A_propos}</p>
-                    ) : (
-                        <p>Chargement…</p>
-                    )}
+                <div className="col-12 col-lg-4">
+                    <div className="about-artisan">
+                        <h2 className='text-center'>A propos : </h2>
+                        {artisan ? (
+                            <p>{artisan.A_propos}</p>
+                        ) : (
+                            <p>Chargement…</p>
+                        )}
+                    </div>
+
+                    <div className="contact-artisan mt-3">
+                        <h2 className='text-center'>Contact : </h2>
+                        <form onSubmit={handleSubmit} noValidate>
+                            <div className='mb-3'>
+                                <input 
+                                    type="text" 
+                                    id='contactName'
+                                    name='name'
+                                    className='form-control contact-form'
+                                    placeholder='Nom'
+                                    autoComplete='name'
+                                    required
+                                />
+                            </div>
+
+                            <div className='mb-3'>
+                                <input 
+                                    type="email"
+                                    id='contactEmail'
+                                    name='email'
+                                    className='form-control contact-form'
+                                    placeholder='Email'
+                                    autoComplete='email'
+                                    required
+                                />
+                            </div>
+
+                            <div className='mb-3'>
+                                <textarea 
+                                    name="message" 
+                                    id="contactMessage"
+                                    className='form-control contact-form'
+                                    rows={5}
+                                    placeholder='Votre message...'
+                                    required
+                                />
+                            </div>
+
+                            <button type="submit" className='btn btn-primary d-block mx-auto'>Envoyer</button>
+                        </form>
+                    </div>
                 </div>
             </div>
-
-            <div className="row gx-4 gy-0 mt-0">
-                <div className="col-12 col-lg-5 ms-lg-auto contact-artisan">
-                    <h2 className='text-center'>Contact : </h2>
-                    
-                    <form onSubmit={handleSubmit} noValidate>
-                        <div className='mb-3'>
-                            <input 
-                                type="text" 
-                                id='contactName'
-                                name='name'
-                                className='form-control'
-                                placeholder='Nom'
-                                autoComplete='name'
-                                required
-                            />
-                        </div>
-
-
-                        <div className='mb-3'>
-                            <input 
-                                type="email"
-                                id='contactEmail'
-                                name='email'
-                                className='form-control'
-                                placeholder='Email'
-                                autoComplete='email'
-                                required
-                            />
-                        </div>
-
-                        <div className='mb-3'>
-                            <textarea 
-                                name="message" 
-                                id="contactMessage"
-                                className='form-control'
-                                rows={5}
-                                placeholder='Votre message...'
-                                required
-                            />
-                        </div>
-
-                        <button type="submit" className='btn btn-primary'>Envoyer</button>
-                    </form>
-                </div>
-            </div>
+            
         </div>
     )
 }
