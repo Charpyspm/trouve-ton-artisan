@@ -55,7 +55,7 @@ const Header = () => {
                 </div>
                 {/* Cachées en mobile */}
                     <div className='link mt-3 mb-3 d-none d-md-flex gap-2 flex-wrap justify-content-end'>
-                        <Link to='/list?categorie=Batiment' className='categorie-link btn-sm'>Bâtiment</Link>
+                        <Link to='/list?categorie=Bâtiment' className='categorie-link btn-sm'>Bâtiment</Link>
                         <Link to='/list?categorie=Services' className='categorie-link btn-sm'>Services</Link>
                         <Link to='/list?categorie=Fabrication' className='categorie-link btn-sm'>Fabrication</Link>
                         <Link to='/list?categorie=Alimentation' className='categorie-link btn-sm'>Alimentation</Link>
