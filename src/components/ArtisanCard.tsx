@@ -6,7 +6,7 @@ type ArtisanCardProps = {
     rating: number;
     speciality: string;
     location: string;
-    to?: string; // optional route for navigation
+    to?: string;
 };
 
 function renderStars(rating: number) {
