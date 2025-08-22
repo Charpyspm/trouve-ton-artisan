@@ -3,7 +3,7 @@
   publish = "dist"
 
 [build.environment]
-  NODE_VERSION = "18.20.3"
+  NODE_VERSION = "20.18.0"
 
 # SPA fallback (Netlify also respects public/_redirects)
 [[redirects]]
