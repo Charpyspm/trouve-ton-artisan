@@ -17,6 +17,7 @@ const pool = mysql.createPool({
   user: process.env.DB_USER || 'root',
   password: process.env.DB_PASSWORD || '',
   database: process.env.DB_NAME || 'trouve_ton_artisan',
+  charset: 'utf8mb4_general_ci',
   waitForConnections: true,
   connectionLimit: 10,
 });

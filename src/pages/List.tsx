@@ -24,8 +24,21 @@ const List = () => {
     }, []);
 
     const filtered = useMemo(() => {
+        const decodeMojibake = (s: string) => {
+            try {
+                // Interpret JS string as Latin-1 bytes, then decode as UTF-8
+                const bytes = Uint8Array.from(Array.prototype.map.call(s, (c: string) => c.charCodeAt(0) & 0xff));
+                const decoded = new TextDecoder('utf-8').decode(bytes);
+                // Prefer decoded when it reduces typical mojibake markers
+                if (/[ÃÂ]/.test(s) && !/[ÃÂ]/.test(decoded)) return decoded;
+                return decoded;
+            } catch {
+                return s;
+            }
+        };
+
         const normalize = (s: string | undefined | null) =>
-            (s ?? '')
+            decodeMojibake(s ?? '')
               .normalize('NFD')
               // Strip combining diacritics (broadly supported)
               .replace(/[\u0300-\u036f]/g, '')
