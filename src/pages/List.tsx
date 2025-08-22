@@ -24,10 +24,11 @@ const List = () => {
     }, []);
 
     const filtered = useMemo(() => {
-        const normalize = (s: string) =>
-            s
-              ?.normalize('NFD')
-              .replace(/\p{Diacritic}/gu, '')
+        const normalize = (s: string | undefined | null) =>
+            (s ?? '')
+              .normalize('NFD')
+              // Strip combining diacritics (broadly supported)
+              .replace(/[\u0300-\u036f]/g, '')
               .trim()
               .toLowerCase();
 
