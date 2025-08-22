@@ -2,12 +2,16 @@
     display: block !important;
     margin-left: auto !important;
     margin-right: auto !important;
-    border: 1px solid green !important;
 }
 
 
 .artisan-card {
     max-width: 300px !important;
-    margin: 50px;
+    margin: 50px auto; 
     justify-content: center;
+}
+
+.artisan-card-actions {
+    max-width: 300px;
+    margin: 0 auto; 
 }

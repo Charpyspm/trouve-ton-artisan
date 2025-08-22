@@ -6,15 +6,24 @@ import { fetchArtisan, type Artisan } from '../lib/api';
 import { usePageMeta } from '../lib/usePageMeta';
 
 
-const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+const handleMailto = (e: React.FormEvent<HTMLFormElement>, artisanEmail?: string | null, artisanNom?: string | null) => {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
-    console.log({
-        name: data.get('name'),
-        email: data.get('email'),
-        message: data.get('message'),
-    });
-    e.currentTarget.reset();
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    const name = String(data.get('name') || '').trim();
+    const email = String(data.get('email') || '').trim();
+    const message = String(data.get('message') || '').trim();
+    if (!artisanEmail) {
+        alert("Aucune adresse email disponible pour cet artisan.");
+        return;
+    }
+    if (!name || !email || !message) return;
+    const subject = encodeURIComponent(`Contact ${artisanNom || ''}`.trim());
+    const body = encodeURIComponent(`De: ${name} <${email}>\n\n${message}`);
+    const url = `mailto:${artisanEmail}?subject=${subject}&body=${body}`;
+    window.location.href = url;
+    // Optionnel: reset le formulaire après ouverture du client mail
+    form.reset();
 }
 
 const Fiche = () => {
@@ -46,13 +55,27 @@ const Fiche = () => {
                     {loading && <p>Chargement…</p>}
                     {error && <p className='text-danger'>{error}</p>}
                     {artisan && (
-                        <ArtisanFiche
-                            name={artisan.Nom}
-                            profilePicture={undefined}
-                            rating={Number(artisan.Note) || 0}
-                            speciality={artisan.Spécialité}
-                            location={artisan.Ville}
-                        />
+                        <>
+                            <ArtisanFiche
+                                name={artisan.Nom}
+                                profilePicture={undefined}
+                                rating={Number(artisan.Note) || 0}
+                                speciality={artisan.Spécialité}
+                                location={artisan.Ville}
+                            />
+                            {artisan.Site_Web ? (
+                                <div className="artisan-card-actions mt-3 text-center">
+                                    <a
+                                        href={(artisan.Site_Web?.startsWith('http') ? artisan.Site_Web : `https://${artisan.Site_Web}`) as string}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="btn btn-primary d-block mx-auto"
+                                    >
+                                        Visiter le site web
+                                    </a>
+                                </div>
+                            ) : null}
+                        </>
                     )}
                 </div>
                 <div className="col-12 col-lg-4">
@@ -67,7 +90,7 @@ const Fiche = () => {
 
                     <div className="contact-artisan mt-3">
                         <h2 className='text-center'>Contact : </h2>
-                        <form onSubmit={handleSubmit} noValidate>
+                        <form onSubmit={(e) => handleMailto(e, artisan?.Email || null, artisan?.Nom || null)} noValidate>
                             <div className='mb-3'>
                                 <input 
                                     type="text" 

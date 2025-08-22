@@ -32,3 +32,9 @@
 .send-button:hover {
   background-color: #00497c;
 }
+
+.fiche-artisan .btn.btn-primary,
+.contact-artisan .btn.btn-primary,
+.artisan-card-actions .btn.btn-primary {
+  border-radius: 35px;
+}

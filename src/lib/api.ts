@@ -21,3 +21,16 @@ export async function fetchArtisan(nom: string): Promise<Artisan> {
   if (!res.ok) throw new Error('Not found');
   return res.json();
 }
+
+export async function contactArtisan(nom: string, payload: { name: string; email: string; message: string }) {
+  const res = await fetch(`/api/artisans/${encodeURIComponent(nom)}/contact`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => null);
+    throw new Error(err?.error || 'Failed to send');
+  }
+  return res.json();
+}
