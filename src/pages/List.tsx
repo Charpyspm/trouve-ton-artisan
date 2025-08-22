@@ -24,14 +24,23 @@ const List = () => {
     }, []);
 
     const filtered = useMemo(() => {
+        const normalize = (s: string) =>
+            s
+              ?.normalize('NFD')
+              .replace(/\p{Diacritic}/gu, '')
+              .trim()
+              .toLowerCase();
+
         let res = artisans;
         if (categorie) {
-            res = res.filter(a => a.Catégorie === categorie);
+            const catNorm = normalize(categorie);
+            res = res.filter(a => normalize(a.Catégorie) === catNorm);
         }
         if (q) {
+            const qNorm = normalize(q);
             res = res.filter(a => {
-                const hay = `${a.Nom} ${a.Spécialité} ${a.Ville} ${a.Catégorie}`.toLowerCase();
-                return hay.includes(q);
+                const hay = `${a.Nom} ${a.Spécialité} ${a.Ville} ${a.Catégorie}`;
+                return normalize(hay).includes(qNorm);
             });
         }
         return res;
