@@ -22,7 +22,6 @@ const handleMailto = (e: React.FormEvent<HTMLFormElement>, artisanEmail?: string
     const body = encodeURIComponent(`De: ${name} <${email}>\n\n${message}`);
     const url = `mailto:${artisanEmail}?subject=${subject}&body=${body}`;
     window.location.href = url;
-    // Optionnel: reset le formulaire après ouverture du client mail
     form.reset();
 }
 

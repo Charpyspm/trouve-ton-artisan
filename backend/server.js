@@ -46,7 +46,7 @@ app.get('/api/artisans/:nom', async (req, res) => {
   }
 });
 
-// Transporter for sending emails (configure via env)
+// Envoie email
 const mailTransporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
   port: process.env.SMTP_PORT ? Number(process.env.SMTP_PORT) : 587,
@@ -57,7 +57,7 @@ const mailTransporter = nodemailer.createTransport({
   } : undefined,
 });
 
-// Contact endpoint: send message to the artisan's email from DB
+
 app.post('/api/artisans/:nom/contact', async (req, res) => {
   try {
     const { nom } = req.params;
@@ -76,7 +76,7 @@ app.post('/api/artisans/:nom/contact', async (req, res) => {
       return res.status(400).json({ error: 'Artisan has no email' });
     }
 
-    // Compose email
+  
     const fromAddr = process.env.FROM_EMAIL || process.env.SMTP_USER || 'no-reply@example.com';
     const siteName = process.env.SITE_NAME || 'Trouve ton artisan';
 
